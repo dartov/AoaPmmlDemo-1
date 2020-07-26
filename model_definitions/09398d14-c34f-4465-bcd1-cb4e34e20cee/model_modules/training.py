@@ -18,7 +18,6 @@ def train(data_conf, model_conf, **kwargs):
 
     """
 
-    hyperparams = model_conf["hyperParameters"]
 
     # load data & engineer
     iris_df = pd.read_csv(data_conf['location'])
