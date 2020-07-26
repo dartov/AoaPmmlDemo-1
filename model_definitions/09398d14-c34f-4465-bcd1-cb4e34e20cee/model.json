@@ -1,0 +1,13 @@
+{
+    "id": "09398d14-c34f-4465-bcd1-cb4e34e20cee",
+    "name": "PMML Iris model",
+    "description": "Demo Iris model using PMML artefact format",
+    "language": "python",
+    "automation" : {
+        "servingEngine": "ivsm",
+        "docker" : {
+            "trainerImage": "dartov/aoa-java-trainer:3.6.8"
+        }
+    }
+
+}
