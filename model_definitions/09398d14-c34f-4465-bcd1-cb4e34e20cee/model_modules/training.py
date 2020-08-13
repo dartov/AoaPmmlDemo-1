@@ -22,9 +22,8 @@ def train(data_conf, model_conf, **kwargs):
 
     # load data & engineer
     iris_df = pd.read_csv(data_conf['location'])
-    train, _ = train_test_split(iris_df, test_size=0.2, random_state=42)
-    features = 'sepal_length,sepal_width,petal_length,petal_width'.split(',')
-    X = train.loc[:, features]
+    train, _ = train_test_split(iris_df, test_size=0.5, random_state=42)
+    X = train.drop("species", 1)
     y = train['species']
 
     print("Starting training...")

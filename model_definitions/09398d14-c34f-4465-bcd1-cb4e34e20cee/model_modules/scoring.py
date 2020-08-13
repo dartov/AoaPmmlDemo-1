@@ -19,9 +19,8 @@ def evaluate(data_conf, model_conf, **kwargs):
     """
 
     predict_df = pd.read_csv(data_conf['location'])
-    _, test = train_test_split(predict_df, test_size=0.2, random_state=42)
-    features = 'sepal_length,sepal_width,petal_length,petal_width'.split(',')
-    X_predict = test.loc[:, features]
+    _, test = train_test_split(predict_df, test_size=0.5, random_state=42)
+    X_predict = test.drop("species", 1)
     y_test = test['species']
 
     jnius_configure_classpath()
@@ -31,6 +30,7 @@ def evaluate(data_conf, model_conf, **kwargs):
     .verify()
 
     y_predict = evaluator.evaluateAll(X_predict)
+    
     scores = {}
     scores['accuracy'] = metrics.accuracy_score(y_test, y_predict['y'])
     print("model accuracy is ", scores['accuracy'])
