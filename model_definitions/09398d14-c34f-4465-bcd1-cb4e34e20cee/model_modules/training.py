@@ -3,6 +3,7 @@ import os
 from sklearn2pmml import PMMLPipeline
 from sklearn2pmml import sklearn2pmml
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 
 
@@ -21,9 +22,10 @@ def train(data_conf, model_conf, **kwargs):
 
     # load data & engineer
     iris_df = pd.read_csv(data_conf['location'])
-    features = 'sepallength,sepalwidth,petallength,petalwidth'.split(',')
-    X = iris_df.loc[:, features]
-    y = iris_df['class']
+    train, _ = train_test_split(iris_df, test_size=0.2, random_state=42)
+    features = 'sepal_length,sepal_width,petal_length,petal_width'.split(',')
+    X = train.loc[:, features]
+    y = train['species']
 
     print("Starting training...")
     # fit model to training data
